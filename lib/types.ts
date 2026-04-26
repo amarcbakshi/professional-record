@@ -14,10 +14,21 @@ export type PrSector = {
   dimensions: Dimension[]
 }
 
+export type SourceLink = {
+  url: string
+  title: string
+}
+
+export type DimensionDetail = {
+  rationale: string
+  sources: SourceLink[]
+}
+
 export type KeyEvent = {
   date: string
   description: string
   type: 'positive' | 'negative' | 'neutral'
+  source_url?: string
 }
 
 export type PrOrganization = {
@@ -28,7 +39,8 @@ export type PrOrganization = {
   grade_label: string
   summary: string
   dimension_scores: Record<string, number>
-  sources: string[]
+  dimension_details: Record<string, DimensionDetail>
+  sources: (string | SourceLink)[]
   key_events: KeyEvent[]
   last_researched_at: string
   created_at: string

@@ -3,8 +3,18 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
-import type { PrSector, PrOrganization } from '@/lib/types'
+import type { PrSector, PrOrganization, SourceLink } from '@/lib/types'
 import { GRADE_META } from '@/lib/types'
+
+function sourceUrl(src: string | SourceLink): string {
+  return typeof src === 'string' ? src : src.url
+}
+function sourceTitle(src: string | SourceLink): string {
+  if (typeof src === 'string') {
+    try { return new URL(src).hostname.replace('www.', '') } catch { return src }
+  }
+  return src.title
+}
 
 export default function OrgDetailPage() {
   const { sector, orgId } = useParams<{ sector: string; orgId: string }>()
@@ -33,6 +43,7 @@ export default function OrgDetailPage() {
   const avg = scores.length ? (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(1) : '—'
   const events = Array.isArray(org.key_events) ? org.key_events : []
   const sources = Array.isArray(org.sources) ? org.sources : []
+  const details = org.dimension_details && typeof org.dimension_details === 'object' ? org.dimension_details : {}
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-10">
@@ -68,12 +79,13 @@ export default function OrgDetailPage() {
         )}
       </div>
 
-      {/* Dimension scores */}
+      {/* Dimension scores with rationales */}
       <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 mb-6">
         <h2 className="text-white font-semibold text-lg mb-6">Score Breakdown</h2>
-        <div className="space-y-6">
+        <div className="space-y-8">
           {sectorData.dimensions.map((dim) => {
             const score = org.dimension_scores[dim.key] ?? 0
+            const detail = details[dim.key]
             return (
               <div key={dim.key}>
                 <div className="flex items-baseline justify-between mb-2">
@@ -83,12 +95,35 @@ export default function OrgDetailPage() {
                   </div>
                   <span className={`text-sm font-bold ${meta.color}`}>{score}/5</span>
                 </div>
-                <div className="flex gap-1 mb-2">
+                <div className="flex gap-1 mb-3">
                   {[1, 2, 3, 4, 5].map((i) => (
                     <div key={i} className={`h-2 flex-1 rounded ${i <= score ? meta.bar : 'bg-slate-800'}`} />
                   ))}
                 </div>
-                <p className="text-slate-600 text-xs">{dim.description}</p>
+
+                {/* Rationale */}
+                {detail?.rationale ? (
+                  <p className="text-slate-400 text-sm leading-relaxed mb-2">{detail.rationale}</p>
+                ) : (
+                  <p className="text-slate-600 text-xs">{dim.description}</p>
+                )}
+
+                {/* Dimension-level sources */}
+                {detail?.sources && detail.sources.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {detail.sources.map((src, i) => (
+                      <a
+                        key={i}
+                        href={src.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-sky-600 hover:text-sky-400 bg-sky-950/40 px-2 py-0.5 rounded"
+                      >
+                        {src.title} ↗
+                      </a>
+                    ))}
+                  </div>
+                )}
               </div>
             )
           })}
@@ -121,7 +156,12 @@ export default function OrgDetailPage() {
                 </div>
                 <div className="pb-5">
                   <p className="text-slate-500 text-xs mb-1">{event.date}</p>
-                  <p className="text-slate-300 text-sm leading-relaxed">{event.description}</p>
+                  <p className="text-slate-300 text-sm leading-relaxed">
+                    {event.description}
+                    {event.source_url && (
+                      <a href={event.source_url} target="_blank" rel="noopener noreferrer" className="text-sky-600 hover:text-sky-400 ml-1">↗</a>
+                    )}
+                  </p>
                 </div>
               </div>
             ))}
@@ -133,11 +173,13 @@ export default function OrgDetailPage() {
       {sources.length > 0 && (
         <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 mb-6">
           <h2 className="text-white font-semibold text-lg mb-4">Sources</h2>
-          <ul className="space-y-2">
+          <ul className="space-y-2.5">
             {sources.map((src, i) => (
-              <li key={i}>
-                <a href={src} target="_blank" rel="noopener noreferrer" className="text-sky-500 hover:text-sky-400 text-sm break-all">
-                  {src}
+              <li key={i} className="flex items-start gap-2">
+                <span className="text-slate-700 text-xs mt-0.5 flex-shrink-0">{i + 1}.</span>
+                <a href={sourceUrl(src)} target="_blank" rel="noopener noreferrer" className="text-sky-500 hover:text-sky-400 text-sm leading-relaxed">
+                  {sourceTitle(src)}
+                  <span className="text-slate-600 text-xs ml-1.5 break-all">{sourceUrl(src).replace(/^https?:\/\//, '').split('/').slice(0, 2).join('/')}</span>
                 </a>
               </li>
             ))}
