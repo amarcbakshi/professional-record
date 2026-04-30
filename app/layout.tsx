@@ -1,9 +1,20 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Libre_Baskerville, Figtree } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 
-const geist = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+const display = Libre_Baskerville({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+});
+
+const body = Figtree({
+  variable: "--font-body",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Professional Record — Institutional Integrity Ratings",
@@ -12,8 +23,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geist.variable} h-full antialiased`}>
-      <body className="min-h-full bg-slate-950 text-slate-200" style={{ fontFamily: 'var(--font-geist-sans), system-ui, sans-serif' }}>
+    <html lang="en" className={`${display.variable} ${body.variable} h-full antialiased`}>
+      <body
+        className="min-h-full"
+        style={{
+          fontFamily: 'var(--font-body), system-ui, sans-serif',
+          background: 'var(--bg-primary)',
+          color: 'var(--text-secondary)',
+        }}
+      >
         <Nav />
         <main>{children}</main>
       </body>

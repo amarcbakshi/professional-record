@@ -12,26 +12,51 @@ export default function Nav() {
   const pathname = usePathname()
 
   return (
-    <nav className="border-b border-slate-800 bg-slate-950/95 backdrop-blur sticky top-0 z-50">
-      <div className="max-w-5xl mx-auto px-4 flex items-center justify-between h-14">
-        <Link href="/" className="flex items-center gap-2.5">
-          <span className="text-sky-500 font-black text-lg tracking-tight">PR</span>
-          <span className="text-white font-semibold text-sm tracking-tight">Professional Record</span>
+    <nav
+      className="sticky top-0 z-50"
+      style={{
+        borderBottom: '1px solid var(--border)',
+        background: 'var(--bg-primary)',
+      }}
+    >
+      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
+        <Link href="/" className="flex items-center gap-3">
+          <span
+            className="font-bold text-xl tracking-tight"
+            style={{
+              fontFamily: 'var(--font-display), Georgia, serif',
+              color: 'var(--accent)',
+            }}
+          >
+            PR
+          </span>
+          <span
+            className="text-sm font-semibold tracking-tight"
+            style={{ color: 'var(--text-primary)' }}
+          >
+            Professional Record
+          </span>
         </Link>
         <div className="flex items-center gap-1">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`px-3 py-1.5 rounded text-sm transition-colors ${
-                pathname.startsWith(link.href)
-                  ? 'bg-sky-500/15 text-sky-400 font-medium'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {links.map((link) => {
+            const active = pathname.startsWith(link.href)
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="px-3 py-1.5 text-sm transition-colors"
+                style={{
+                  color: active ? 'var(--accent)' : 'var(--text-secondary)',
+                  fontWeight: active ? 600 : 400,
+                  textDecoration: active ? 'underline' : 'none',
+                  textDecorationColor: active ? 'var(--accent)' : 'transparent',
+                  textUnderlineOffset: '4px',
+                }}
+              >
+                {link.label}
+              </Link>
+            )
+          })}
         </div>
       </div>
     </nav>

@@ -14,21 +14,10 @@ export type PrSector = {
   dimensions: Dimension[]
 }
 
-export type SourceLink = {
-  url: string
-  title: string
-}
-
-export type DimensionDetail = {
-  rationale: string
-  sources: SourceLink[]
-}
-
 export type KeyEvent = {
   date: string
   description: string
   type: 'positive' | 'negative' | 'neutral'
-  source_url?: string
 }
 
 export type PrOrganization = {
@@ -39,18 +28,60 @@ export type PrOrganization = {
   grade_label: string
   summary: string
   dimension_scores: Record<string, number>
-  dimension_details: Record<string, DimensionDetail>
-  sources: (string | SourceLink)[]
+  sources: string[]
   key_events: KeyEvent[]
   last_researched_at: string
   created_at: string
   updated_at: string
 }
 
-export const GRADE_META: Record<string, { color: string; bg: string; border: string; bar: string; ring: string }> = {
-  A: { color: 'text-emerald-400', bg: 'bg-emerald-950/30', border: 'border-emerald-800/40', bar: 'bg-emerald-500', ring: 'ring-emerald-700/30' },
-  B: { color: 'text-teal-400',    bg: 'bg-teal-950/30',    border: 'border-teal-800/40',    bar: 'bg-teal-500',    ring: 'ring-teal-700/30'    },
-  C: { color: 'text-yellow-400',  bg: 'bg-yellow-950/30',  border: 'border-yellow-800/40',  bar: 'bg-yellow-500',  ring: 'ring-yellow-700/30'  },
-  D: { color: 'text-orange-400',  bg: 'bg-orange-950/30',  border: 'border-orange-800/40',  bar: 'bg-orange-500',  ring: 'ring-orange-700/30'  },
-  F: { color: 'text-red-400',     bg: 'bg-red-950/30',     border: 'border-red-900/40',     bar: 'bg-red-500',     ring: 'ring-red-700/30'     },
+/* Grade visuals tuned for light cream background */
+export const GRADE_META: Record<string, {
+  color: string
+  bg: string
+  border: string
+  bar: string
+  barMuted: string
+  ring: string
+}> = {
+  A: {
+    color: 'var(--grade-a)',
+    bg: 'var(--grade-a-bg)',
+    border: 'var(--grade-a)',
+    bar: 'var(--grade-a)',
+    barMuted: 'var(--grade-a-bg)',
+    ring: 'var(--grade-a)',
+  },
+  B: {
+    color: 'var(--grade-b)',
+    bg: 'var(--grade-b-bg)',
+    border: 'var(--grade-b)',
+    bar: 'var(--grade-b)',
+    barMuted: 'var(--grade-b-bg)',
+    ring: 'var(--grade-b)',
+  },
+  C: {
+    color: 'var(--grade-c)',
+    bg: 'var(--grade-c-bg)',
+    border: 'var(--grade-c)',
+    bar: 'var(--grade-c)',
+    barMuted: 'var(--grade-c-bg)',
+    ring: 'var(--grade-c)',
+  },
+  D: {
+    color: 'var(--grade-d)',
+    bg: 'var(--grade-d-bg)',
+    border: 'var(--grade-d)',
+    bar: 'var(--grade-d)',
+    barMuted: 'var(--grade-d-bg)',
+    ring: 'var(--grade-d)',
+  },
+  F: {
+    color: 'var(--grade-f)',
+    bg: 'var(--grade-f-bg)',
+    border: 'var(--grade-f)',
+    bar: 'var(--grade-f)',
+    barMuted: 'var(--grade-f-bg)',
+    ring: 'var(--grade-f)',
+  },
 }
