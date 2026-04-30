@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const sectorLinks = [
-  { href: '/law-firms', label: 'Law Firms' },
+  { href: '/law-firms', label: 'Law' },
   { href: '/tech', label: 'Tech' },
   { href: '/media', label: 'Media' },
   { href: '/universities', label: 'Universities' },
@@ -59,6 +59,17 @@ export default function Nav() {
               )
             })}
             <span style={{ color: 'var(--border)', margin: '0 0.25rem' }}>|</span>
+            <Link
+              href="/stories"
+              className="px-2.5 py-2 font-semibold uppercase transition-colors"
+              style={{
+                color: pathname.startsWith('/stories') ? 'var(--accent)' : 'var(--text-muted)',
+                fontSize: '0.65rem',
+                letterSpacing: '0.1em',
+              }}
+            >
+              Stories
+            </Link>
             <Link
               href="/methodology"
               className="px-2.5 py-2 font-semibold uppercase transition-colors"
