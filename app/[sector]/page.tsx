@@ -31,7 +31,7 @@ export default function SectorPage() {
 
   if (loading) {
     return (
-      <div className="max-w-6xl mx-auto px-6 py-20">
+      <div className="max-w-7xl mx-auto px-6 py-20">
         <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Loading...</p>
       </div>
     )
@@ -39,7 +39,7 @@ export default function SectorPage() {
 
   if (!sectorData) {
     return (
-      <div className="max-w-6xl mx-auto px-6 py-20">
+      <div className="max-w-7xl mx-auto px-6 py-20">
         <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Sector not found.</p>
       </div>
     )
@@ -57,28 +57,33 @@ export default function SectorPage() {
     .filter((g) => g.count > 0)
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-12">
+    <div>
       {/* Header */}
-      <div className="mb-10">
+      <div
+        className="max-w-7xl mx-auto px-6"
+        style={{ paddingTop: 'clamp(3rem, 6vh, 5rem)', paddingBottom: 'clamp(2rem, 4vh, 3rem)' }}
+      >
         <Link
           href="/"
-          className="text-sm mb-6 inline-block transition-colors"
+          className="text-xs font-semibold uppercase tracking-wider mb-8 inline-block"
           style={{ color: 'var(--text-muted)' }}
         >
           ← All sectors
         </Link>
         <h1
-          className="text-4xl font-bold mb-3"
+          className="font-bold mb-4"
           style={{
             fontFamily: 'var(--font-display), Georgia, serif',
             color: 'var(--text-primary)',
+            fontSize: 'clamp(2.5rem, 6vw, 5rem)',
+            lineHeight: 1.05,
           }}
         >
           {sectorData.name}
         </h1>
         <p
-          className="leading-relaxed mb-4"
-          style={{ color: 'var(--text-tertiary)', maxWidth: '60ch' }}
+          className="leading-relaxed mb-5"
+          style={{ color: 'var(--text-tertiary)', maxWidth: '55ch' }}
         >
           {sectorData.description}
         </p>
@@ -89,105 +94,126 @@ export default function SectorPage() {
               href={sectorData.norm_url}
               target="_blank"
               rel="noopener noreferrer"
+              className="font-semibold"
               style={{ color: 'var(--accent)' }}
             >
               {sectorData.norm_framework} ↗
             </a>
           ) : (
-            <span style={{ color: 'var(--accent)' }}>{sectorData.norm_framework}</span>
+            <span className="font-semibold" style={{ color: 'var(--accent)' }}>{sectorData.norm_framework}</span>
           )}
         </div>
       </div>
 
-      <hr className="accent" style={{ marginBottom: '2rem' }} />
+      <div className="max-w-7xl mx-auto px-6">
+        <hr className="accent" style={{ marginBottom: 'clamp(2rem, 4vh, 3rem)' }} />
+      </div>
 
       {/* Grade summary */}
-      <div className="flex items-center gap-8 mb-8">
-        {gradeCounts.map(({ grade, count }) => (
-          <div key={grade} className="text-center">
-            <div
-              className="text-3xl font-bold"
-              style={{ color: GRADE_META[grade].color }}
-            >
-              {count}
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex items-baseline gap-10 mb-10">
+          {gradeCounts.map(({ grade, count }) => (
+            <div key={grade} className="text-center">
+              <div
+                className="font-bold"
+                style={{
+                  color: GRADE_META[grade].color,
+                  fontFamily: 'var(--font-display), Georgia, serif',
+                  fontSize: '3.5rem',
+                  lineHeight: 1,
+                }}
+              >
+                {count}
+              </div>
+              <div
+                className="text-xs uppercase tracking-wide mt-1"
+                style={{ color: 'var(--text-muted)' }}
+              >
+                Grade {grade}
+              </div>
             </div>
-            <div className="text-xs mt-0.5" style={{ color: 'var(--text-muted)' }}>
-              Grade {grade}
-            </div>
+          ))}
+          <div
+            className="ml-auto text-xs uppercase tracking-wide"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            {orgs.length} organizations rated
           </div>
-        ))}
-        <div className="ml-auto text-xs" style={{ color: 'var(--text-muted)' }}>
-          {orgs.length} organizations rated
+        </div>
+
+        {/* Filter */}
+        <div className="flex gap-2 mb-12">
+          {['All', 'A', 'B', 'C', 'D', 'F'].map((g) => (
+            <button
+              key={g}
+              onClick={() => setFilter(g)}
+              className="px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors"
+              style={{
+                background: filter === g ? 'var(--accent)' : 'transparent',
+                color: filter === g ? 'var(--on-accent)' : 'var(--text-muted)',
+                border: filter === g ? 'none' : '2px solid var(--border)',
+              }}
+            >
+              {g === 'All' ? 'All' : g}
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* Filter */}
-      <div className="flex gap-2 mb-10">
-        {['All', 'A', 'B', 'C', 'D', 'F'].map((g) => (
-          <button
-            key={g}
-            onClick={() => setFilter(g)}
-            className="px-3 py-1.5 text-sm font-medium transition-colors"
-            style={{
-              background: filter === g ? 'var(--accent)' : 'transparent',
-              color: filter === g ? '#fff' : 'var(--text-tertiary)',
-              border: filter === g ? 'none' : '1px solid var(--border)',
-              borderRadius: '2px',
-            }}
-          >
-            {g === 'All' ? 'All' : `Grade ${g}`}
-          </button>
-        ))}
-      </div>
-
       {/* Org list */}
-      <div className="space-y-12">
-        {['A', 'B', 'C', 'D', 'F'].map((grade) => {
-          const group = gradeGroups[grade]
-          if (!group || group.length === 0) return null
-          const meta = GRADE_META[grade]
-          return (
-            <div key={grade}>
-              {/* Grade group header */}
-              <div
-                className="flex items-baseline gap-3 mb-5 pb-2"
-                style={{ borderBottom: `2px solid ${meta.color}` }}
-              >
-                <span
-                  className="text-3xl font-bold"
-                  style={{ color: meta.color, fontFamily: 'var(--font-display), Georgia, serif' }}
+      <div className="max-w-7xl mx-auto px-6" style={{ paddingBottom: 'clamp(4rem, 8vh, 6rem)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(3rem, 5vh, 5rem)' }}>
+          {['A', 'B', 'C', 'D', 'F'].map((grade) => {
+            const group = gradeGroups[grade]
+            if (!group || group.length === 0) return null
+            const meta = GRADE_META[grade]
+            return (
+              <div key={grade}>
+                {/* Grade group header */}
+                <div
+                  className="flex items-baseline gap-4 mb-6 pb-3"
+                  style={{ borderBottom: `3px solid ${meta.color}` }}
                 >
-                  {grade}
-                </span>
-                <span className="text-sm" style={{ color: 'var(--text-tertiary)' }}>
-                  {group[0]?.grade_label}
-                </span>
-                <span className="text-xs ml-auto" style={{ color: 'var(--text-muted)' }}>
-                  {group.length} firm{group.length !== 1 ? 's' : ''}
-                </span>
-              </div>
+                  <span
+                    className="font-bold"
+                    style={{
+                      color: meta.color,
+                      fontFamily: 'var(--font-display), Georgia, serif',
+                      fontSize: '3rem',
+                      lineHeight: 1,
+                    }}
+                  >
+                    {grade}
+                  </span>
+                  <span className="text-sm" style={{ color: 'var(--text-tertiary)' }}>
+                    {group[0]?.grade_label}
+                  </span>
+                  <span
+                    className="text-xs ml-auto uppercase tracking-wide"
+                    style={{ color: 'var(--text-muted)' }}
+                  >
+                    {group.length} firm{group.length !== 1 ? 's' : ''}
+                  </span>
+                </div>
 
-              {/* Org rows */}
-              <div className="space-y-0">
+                {/* Org rows */}
                 {group.map((org) => (
                   <Link key={org.id} href={`/${sector}/${org.id}`} className="group block">
                     <div
-                      className="py-6 transition-colors"
-                      style={{
-                        borderBottom: '1px solid var(--border)',
-                      }}
+                      className="py-7"
+                      style={{ borderBottom: '1px solid var(--border)' }}
                     >
-                      <div className="flex items-start justify-between gap-6">
+                      <div className="flex items-start justify-between gap-8">
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-baseline gap-3 mb-2">
+                          <div className="flex items-baseline gap-3 mb-3">
                             <h2
-                              className="text-lg font-bold transition-colors"
-                              style={{ color: 'var(--text-primary)' }}
+                              className="font-bold"
+                              style={{ color: 'var(--text-primary)', fontSize: '1.25rem' }}
                             >
                               {org.name}
                             </h2>
                             <span
-                              className="text-xs font-semibold"
+                              className="text-xs font-bold uppercase tracking-wider"
                               style={{ color: meta.color }}
                             >
                               {org.grade_label}
@@ -201,27 +227,28 @@ export default function SectorPage() {
                           </p>
                         </div>
 
-                        {/* Large grade letter */}
+                        {/* Giant grade letter */}
                         <div
-                          className="text-6xl font-bold leading-none flex-shrink-0"
+                          className="font-bold leading-none flex-shrink-0"
                           style={{
                             color: meta.color,
                             fontFamily: 'var(--font-display), Georgia, serif',
-                            opacity: 0.8,
+                            fontSize: 'clamp(4rem, 8vw, 7rem)',
+                            opacity: 0.7,
                           }}
                         >
                           {org.grade}
                         </div>
                       </div>
 
-                      {/* Score bars */}
-                      <div className="mt-4 flex gap-4">
+                      {/* Score bars — taller */}
+                      <div className="mt-5 flex gap-5">
                         {sectorData.dimensions.map((dim) => {
                           const score = org.dimension_scores[dim.key] ?? 0
                           return (
                             <div key={dim.key} className="flex-1">
                               <div
-                                className="text-xs mb-1.5 truncate"
+                                className="text-xs mb-2 truncate"
                                 style={{ color: 'var(--text-muted)' }}
                               >
                                 {dim.label}
@@ -230,10 +257,10 @@ export default function SectorPage() {
                                 {[1, 2, 3, 4, 5].map((i) => (
                                   <div
                                     key={i}
-                                    className="h-1.5 flex-1"
+                                    className="flex-1"
                                     style={{
+                                      height: '6px',
                                       background: i <= score ? meta.bar : meta.barMuted,
-                                      borderRadius: '1px',
                                     }}
                                   />
                                 ))}
@@ -246,21 +273,21 @@ export default function SectorPage() {
                   </Link>
                 ))}
               </div>
-            </div>
-          )
-        })}
+            )
+          })}
+        </div>
       </div>
 
       {/* Footer */}
-      <div className="mt-16 pt-6" style={{ borderTop: '1px solid var(--border)' }}>
-        <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
-          Ratings based on publicly available information as of April 2026.
-          Each score reflects the gap between this organization's stated
-          professional obligations and its documented behavior.{' '}
-          <Link href="/methodology" style={{ color: 'var(--accent)' }}>
-            Read the methodology →
-          </Link>
-        </p>
+      <div className="max-w-7xl mx-auto px-6" style={{ paddingBottom: '3rem' }}>
+        <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
+          <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+            Ratings based on publicly available information as of April 2026.{' '}
+            <Link href="/methodology" style={{ color: 'var(--accent)' }}>
+              Read the methodology →
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   )

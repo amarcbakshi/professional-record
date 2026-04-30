@@ -37,115 +37,134 @@ const SCALE = [
 
 export default function MethodologyPage() {
   return (
-    <div className="max-w-4xl mx-auto px-6 py-12">
-      <Link
-        href="/"
-        className="text-sm mb-8 inline-block"
-        style={{ color: 'var(--text-muted)' }}
-      >
-        ← Home
-      </Link>
-
-      <h1
-        className="text-4xl font-bold mb-4"
-        style={{
-          fontFamily: 'var(--font-display), Georgia, serif',
-          color: 'var(--text-primary)',
-        }}
-      >
-        Methodology
-      </h1>
-      <p
-        className="leading-relaxed mb-10"
-        style={{ color: 'var(--text-secondary)', maxWidth: '60ch' }}
-      >
-        Professional Record evaluates institutions against the ethical
-        obligations of their own professions, not against external political
-        standards. The norms we use were written by professional bodies, ratified
-        before any crisis, and apply regardless of the political environment.
-      </p>
-
-      <hr className="accent" style={{ marginBottom: '2.5rem' }} />
-
-      {/* Core principle */}
+    <div>
+      {/* Header */}
       <div
-        className="p-6 mb-12"
-        style={{
-          background: 'var(--accent-light)',
-          borderLeft: '3px solid var(--accent)',
-        }}
+        className="max-w-5xl mx-auto px-6"
+        style={{ paddingTop: 'clamp(3rem, 6vh, 5rem)' }}
       >
-        <h2
-          className="font-bold mb-3"
-          style={{
-            fontFamily: 'var(--font-display), Georgia, serif',
-            color: 'var(--accent)',
-          }}
+        <Link
+          href="/"
+          className="text-xs font-semibold uppercase tracking-wider mb-8 inline-block"
+          style={{ color: 'var(--text-muted)' }}
         >
-          The core principle
-        </h2>
-        <p className="leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-          Every organization we rate has published or adopted a set of
-          professional obligations. Those documents are the baseline. We do not
-          impose external political standards. We hold institutions to what they
-          said they would do.
-        </p>
-      </div>
+          ← Home
+        </Link>
 
-      {/* Scoring scale */}
-      <div className="mb-12">
-        <h2
-          className="text-xl font-bold mb-6"
+        <h1
+          className="font-bold mb-5"
           style={{
             fontFamily: 'var(--font-display), Georgia, serif',
             color: 'var(--text-primary)',
+            fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+            lineHeight: 1.05,
           }}
         >
-          Scoring Scale (1-5 per dimension)
+          Methodology
+        </h1>
+        <p
+          className="leading-relaxed"
+          style={{ color: 'var(--text-secondary)', maxWidth: '60ch', fontSize: '1.05rem', lineHeight: 1.75 }}
+        >
+          Professional Record evaluates institutions against the ethical
+          obligations of their own professions, not against external political
+          standards. The norms we use were written by professional bodies, ratified
+          before any crisis, and apply regardless of the political environment.
+        </p>
+      </div>
+
+      {/* Core principle — red band, full bleed, committed */}
+      <section
+        className="red-band"
+        style={{ marginTop: 'clamp(2.5rem, 5vh, 4rem)', marginBottom: 'clamp(3rem, 6vh, 5rem)' }}
+      >
+        <div
+          className="max-w-5xl mx-auto px-6"
+          style={{ padding: 'clamp(2.5rem, 5vh, 4rem) 1.5rem' }}
+        >
+          <h2
+            className="font-bold mb-4"
+            style={{
+              fontFamily: 'var(--font-display), Georgia, serif',
+              color: 'var(--on-accent)',
+              fontSize: '1.5rem',
+            }}
+          >
+            The core principle
+          </h2>
+          <p
+            className="leading-relaxed"
+            style={{ color: 'var(--on-accent)', maxWidth: '55ch', fontSize: '1.05rem', lineHeight: 1.75 }}
+          >
+            Every organization we rate has published or adopted a set of
+            professional obligations. Those documents are the baseline. We do not
+            impose external political standards. We hold institutions to what they
+            said they would do.
+          </p>
+        </div>
+      </section>
+
+      {/* Scoring scale */}
+      <div className="max-w-5xl mx-auto px-6" style={{ paddingBottom: 'clamp(3rem, 6vh, 5rem)' }}>
+        <h2
+          className="font-bold mb-8"
+          style={{
+            fontFamily: 'var(--font-display), Georgia, serif',
+            color: 'var(--text-primary)',
+            fontSize: '1.5rem',
+          }}
+        >
+          Scoring Scale
         </h2>
-        <div className="space-y-0">
+        <div>
           {SCALE.map(({ score, label, description }) => (
             <div
               key={score}
-              className="flex gap-5 py-4"
+              className="flex gap-6 py-5"
               style={{ borderBottom: '1px solid var(--border)' }}
             >
               <div
-                className="text-2xl font-bold w-8 flex-shrink-0"
+                className="font-bold flex-shrink-0"
                 style={{
                   fontFamily: 'var(--font-display), Georgia, serif',
                   color: 'var(--accent)',
+                  fontSize: '2.5rem',
+                  lineHeight: 1,
+                  width: '2.5rem',
+                  textAlign: 'center',
                 }}
               >
                 {score}
               </div>
               <div>
                 <p
-                  className="text-sm font-semibold mb-1"
-                  style={{ color: 'var(--text-primary)' }}
+                  className="font-semibold mb-1"
+                  style={{ color: 'var(--text-primary)', fontSize: '0.95rem' }}
                 >
                   {label}
                 </p>
-                <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>
                   {description}
                 </p>
               </div>
             </div>
           ))}
         </div>
-        <p className="text-xs mt-4" style={{ color: 'var(--text-muted)' }}>
-          Letter grades are derived from average scores: A ≥ 4.5, B ≥ 3.5, C ≥ 2.5, D ≥ 1.5, F &lt; 1.5. Scores may be adjusted for systemic or disqualifying violations.
+        <p className="text-xs mt-5" style={{ color: 'var(--text-muted)' }}>
+          Letter grades derived from averages: A ≥ 4.5, B ≥ 3.5, C ≥ 2.5, D ≥ 1.5, F &lt; 1.5.
         </p>
       </div>
 
       {/* Sector frameworks */}
       {sectors.map((sector) => (
-        <div key={sector.name} className="mb-12">
+        <div key={sector.name} className="max-w-5xl mx-auto px-6" style={{ paddingBottom: 'clamp(3rem, 6vh, 5rem)' }}>
+          <hr className="accent" style={{ marginBottom: 'clamp(2rem, 4vh, 3rem)' }} />
           <h2
-            className="text-xl font-bold mb-2"
+            className="font-bold mb-2"
             style={{
               fontFamily: 'var(--font-display), Georgia, serif',
               color: 'var(--text-primary)',
+              fontSize: '1.5rem',
             }}
           >
             {sector.name}
@@ -154,26 +173,29 @@ export default function MethodologyPage() {
             href={sector.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm mb-6 inline-block"
+            className="text-sm font-semibold mb-8 inline-block"
             style={{ color: 'var(--accent)' }}
           >
             {sector.framework} ↗
           </a>
-          <div className="space-y-0">
+          <div>
             {sector.dimensions.map((dim) => (
               <div
                 key={dim.label}
-                className="py-5"
+                className="py-6"
                 style={{ borderBottom: '1px solid var(--border)' }}
               >
-                <div className="flex items-baseline gap-2 mb-2">
+                <div className="flex items-baseline gap-3 mb-2">
                   <h3
                     className="font-semibold"
                     style={{ color: 'var(--text-primary)' }}
                   >
                     {dim.label}
                   </h3>
-                  <span className="text-xs" style={{ color: 'var(--accent)' }}>
+                  <span
+                    className="text-xs font-semibold uppercase tracking-wider"
+                    style={{ color: 'var(--accent)' }}
+                  >
                     {dim.citation}
                   </span>
                 </div>
@@ -190,19 +212,20 @@ export default function MethodologyPage() {
       ))}
 
       {/* Evidence standards */}
-      <div className="mb-12">
-        <hr className="accent" style={{ marginBottom: '1.5rem' }} />
+      <div className="max-w-5xl mx-auto px-6" style={{ paddingBottom: 'clamp(3rem, 6vh, 5rem)' }}>
+        <hr className="accent" style={{ marginBottom: 'clamp(2rem, 4vh, 3rem)' }} />
         <h2
-          className="text-lg font-bold mb-4"
+          className="font-bold mb-5"
           style={{
             fontFamily: 'var(--font-display), Georgia, serif',
             color: 'var(--text-primary)',
+            fontSize: '1.25rem',
           }}
         >
           Evidence standards
         </h2>
         <p
-          className="text-sm leading-relaxed mb-3"
+          className="text-sm leading-relaxed mb-4"
           style={{ color: 'var(--text-tertiary)', maxWidth: '60ch' }}
         >
           All scores are based on publicly available information: court filings,
