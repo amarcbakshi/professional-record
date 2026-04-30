@@ -6,7 +6,7 @@ import { supabase } from '@/lib/supabase'
 import type { PrSector, PrOrganization } from '@/lib/types'
 import { GRADE_META } from '@/lib/types'
 
-const VALID_SECTORS = ['law-firms', 'tech']
+const VALID_SECTORS = ['law-firms', 'tech', 'media', 'universities', 'consulting', 'accounting', 'hospitals']
 
 export default function SectorPage() {
   const { sector } = useParams<{ sector: string }>()

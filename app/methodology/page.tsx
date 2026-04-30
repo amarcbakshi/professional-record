@@ -25,6 +25,66 @@ const sectors = [
       { label: 'AI Ethics', citation: 'Own AI Principles + ACM Code §2', description: 'Companies that publish AI safety principles, bias commitments, or responsible deployment frameworks make public commitments we evaluate against their product and research decisions.' },
     ],
   },
+  {
+    name: 'Media Organizations',
+    framework: 'Society of Professional Journalists Code of Ethics + Own Editorial Standards',
+    url: 'https://www.spj.org/ethicscode.asp',
+    dimensions: [
+      { label: 'Editorial Independence', citation: 'SPJ: Act Independently', description: 'Journalists must avoid conflicts of interest and resist pressure from advertisers, donors, owners, or political actors that could compromise editorial judgment.' },
+      { label: 'Truth & Accuracy', citation: 'SPJ: Seek Truth', description: 'Journalists should be honest, fair, and courageous in gathering, reporting, and interpreting information. Editorial decisions should be based on journalistic merit, not external pressure.' },
+      { label: 'Accountability & Transparency', citation: 'SPJ: Be Accountable', description: 'Journalists should explain ethical choices and processes to audiences. Organizations should acknowledge mistakes and correct them promptly, and disclose conflicts of interest.' },
+      { label: 'Minimize Harm', citation: 'SPJ: Minimize Harm', description: 'Ethical journalism treats sources, subjects, colleagues, and members of the public as human beings deserving of respect. Editorial decisions should not be driven by retaliation or appeasement.' },
+      { label: 'Newsroom Integrity', citation: 'Own Standards', description: 'Media organizations that publish editorial standards, mission statements, and workforce commitments make binding promises to their journalists and audiences. We evaluate whether those commitments are maintained under pressure.' },
+    ],
+  },
+  {
+    name: 'Universities',
+    framework: 'AAUP 1940 Statement on Academic Freedom + Own Governance Charters',
+    url: 'https://www.aaup.org/report/1940-statement-principles-academic-freedom-and-tenure',
+    dimensions: [
+      { label: 'Academic Freedom', citation: 'AAUP 1940 Statement', description: 'Teachers are entitled to full freedom in research and in the publication of results. Universities must protect faculty from external interference in teaching and scholarship.' },
+      { label: 'Institutional Autonomy', citation: 'AAUP: Governance', description: 'Universities should resist external pressure that compromises institutional decision-making. Governance decisions should follow established processes, not political demands.' },
+      { label: 'Due Process', citation: 'AAUP: Tenure', description: 'Faculty and students are entitled to due process protections. Disciplinary actions, terminations, and policy changes should follow established governance procedures.' },
+      { label: 'Free Expression', citation: 'Own Policies', description: 'Universities that publish free expression commitments and protest policies make promises to their campus communities. We evaluate whether those policies are applied consistently regardless of viewpoint.' },
+      { label: 'Research Independence', citation: 'Own Mission', description: 'Universities committed to advancing knowledge must protect the independence of research programs from political interference, funding coercion, or ideological litmus tests.' },
+    ],
+  },
+  {
+    name: 'Consulting Firms',
+    framework: 'IMC Code of Ethics + Own Published Standards',
+    url: 'https://www.imcusa.org/page/codeofethics',
+    dimensions: [
+      { label: 'Professional Independence', citation: 'IMC Code: Independence', description: 'Consultants must maintain objectivity and independence in their advice. Recommendations should be based on analysis and evidence, not shaped by political relationships or fear of retaliation.' },
+      { label: 'Conflict of Interest Management', citation: 'IMC Code: Conflicts', description: 'Consultants must disclose and manage conflicts of interest. Serving both government and private clients in overlapping domains requires rigorous separation and transparency.' },
+      { label: 'Duty to Clients', citation: 'IMC Code: Client Service', description: 'Consultants owe their clients competent, objective advice. Abandoning or altering engagements under political pressure violates the fundamental duty of professional service.' },
+      { label: 'Public Interest', citation: 'Own Standards', description: 'Firms that publish commitments to public interest, pro bono work, or social impact make voluntary obligations. We evaluate whether those commitments are maintained or abandoned under pressure.' },
+      { label: 'Workforce Commitments', citation: 'Own DEI & HR Policies', description: 'Firms that publish DEI commitments, equitable hiring goals, or workforce protection policies make promises to their employees. We evaluate whether those commitments were maintained under pressure.' },
+    ],
+  },
+  {
+    name: 'Accounting Firms',
+    framework: 'AICPA Code of Professional Conduct + PCAOB Standards',
+    url: 'https://www.aicpa.org/resources/download/aicpa-code-of-professional-conduct',
+    dimensions: [
+      { label: 'Audit Independence', citation: 'AICPA Rule 101', description: 'Auditors must maintain independence in both fact and appearance. Financial relationships, consulting services, or political entanglements that compromise objectivity violate this core obligation.' },
+      { label: 'Due Professional Care', citation: 'AICPA: General Standards', description: 'Members shall exercise due professional care in the performance of professional services. Negligence, inadequate procedures, or failure to detect material misstatements breach this standard.' },
+      { label: 'Integrity & Objectivity', citation: 'AICPA Rule 102', description: 'Members shall be free of conflicts of interest and shall not knowingly misrepresent facts or subordinate judgment to others. Political pressure does not excuse departures from objectivity.' },
+      { label: 'Public Interest Obligation', citation: 'AICPA: Public Interest', description: 'The accounting profession exists to serve the public interest. Firms that prioritize client retention, political relationships, or revenue over public accountability violate this principle.' },
+      { label: 'Quality Control Systems', citation: 'PCAOB Standards', description: 'Firms must maintain quality control systems that ensure consistent audit quality. PCAOB inspection findings, restatements, and enforcement actions indicate systemic failures in these controls.' },
+    ],
+  },
+  {
+    name: 'Hospital Systems',
+    framework: 'AMA Code of Medical Ethics + Own Mission Statements',
+    url: 'https://www.ama-assn.org/delivering-care/ethics/code-medical-ethics-overview',
+    dimensions: [
+      { label: 'Patient Welfare', citation: 'AMA Opinion 1.1.1', description: "A physician's primary obligation is to the patient. Hospital systems must ensure that financial considerations, political pressures, or institutional interests do not override clinical judgment or patient care." },
+      { label: 'Nondiscrimination', citation: 'AMA Opinion 1.1.2', description: 'Physicians and healthcare institutions may not refuse to care for patients based on race, gender, sexual orientation, gender identity, or other personal characteristics. Restricting evidence-based care under political pressure violates this principle.' },
+      { label: 'Clinical Autonomy', citation: 'AMA Opinion 1.2.6', description: 'Physicians must be free to exercise clinical judgment. Hospital policies that restrict evidence-based treatment options for non-clinical reasons compromise the physician-patient relationship.' },
+      { label: 'Institutional Transparency', citation: 'Own Mission', description: 'Hospital systems that publish mission statements, community benefit commitments, and equity pledges make binding promises. We evaluate whether those commitments are maintained or quietly abandoned.' },
+      { label: 'Workforce & Training Equity', citation: 'Own Policies', description: 'Hospitals that commit to diverse hiring, equitable training programs, and inclusive workplace policies make promises to their staff. We evaluate whether those commitments are maintained under external pressure.' },
+    ],
+  },
 ]
 
 const SCALE = [

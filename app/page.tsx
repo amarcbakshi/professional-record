@@ -19,6 +19,51 @@ const sectors = [
     count: 6,
     gradeCount: { C: 3, D: 3 },
   },
+  {
+    href: '/media',
+    name: 'Media Organizations',
+    framework: 'SPJ Code of Ethics + Own Editorial Standards',
+    description:
+      'Are major media organizations upholding their editorial independence and journalistic ethics, or compromising them under financial and political pressure?',
+    count: 4,
+    gradeCount: { A: 1, C: 1, D: 2 },
+  },
+  {
+    href: '/universities',
+    name: 'Universities',
+    framework: 'AAUP 1940 Statement on Academic Freedom + Own Governance Charters',
+    description:
+      'Are leading universities defending academic freedom and institutional autonomy, or capitulating to external pressure in ways that violate their own governance principles?',
+    count: 3,
+    gradeCount: { A: 1, C: 1, D: 1 },
+  },
+  {
+    href: '/consulting',
+    name: 'Consulting Firms',
+    framework: 'IMC Code of Ethics + Own Published Standards',
+    description:
+      'Are major consulting firms upholding their professional independence and ethical obligations, or compromising them through conflicts of interest and selective service to political actors?',
+    count: 3,
+    gradeCount: { C: 2, D: 1 },
+  },
+  {
+    href: '/accounting',
+    name: 'Accounting Firms',
+    framework: 'AICPA Code of Professional Conduct + PCAOB Standards',
+    description:
+      'Are the major accounting firms upholding their professional independence and audit integrity, or compromising them through conflicts of interest and regulatory failures?',
+    count: 3,
+    gradeCount: { C: 1, D: 2 },
+  },
+  {
+    href: '/hospitals',
+    name: 'Hospital Systems',
+    framework: 'AMA Code of Medical Ethics + Own Mission Statements',
+    description:
+      'Are major hospital systems upholding their medical ethics obligations and patient care commitments, or compromising them under financial, political, or regulatory pressure?',
+    count: 3,
+    gradeCount: { B: 1, C: 1, D: 1 },
+  },
 ]
 
 const GRADE_DOT_COLORS: Record<string, string> = {
