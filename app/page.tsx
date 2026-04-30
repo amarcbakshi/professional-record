@@ -25,8 +25,8 @@ const sectors = [
     framework: 'SPJ Code of Ethics + Own Editorial Standards',
     description:
       'Are major media organizations upholding their editorial independence and journalistic ethics, or compromising them under financial and political pressure?',
-    count: 4,
-    gradeCount: { A: 1, C: 1, D: 2 },
+    count: 8,
+    gradeCount: { A: 2, B: 2, C: 2, D: 2 },
   },
   {
     href: '/universities',
@@ -34,8 +34,8 @@ const sectors = [
     framework: 'AAUP 1940 Statement on Academic Freedom + Own Governance Charters',
     description:
       'Are leading universities defending academic freedom and institutional autonomy, or capitulating to external pressure in ways that violate their own governance principles?',
-    count: 3,
-    gradeCount: { A: 1, C: 1, D: 1 },
+    count: 7,
+    gradeCount: { A: 1, B: 2, C: 3, D: 1 },
   },
   {
     href: '/consulting',
@@ -43,8 +43,8 @@ const sectors = [
     framework: 'IMC Code of Ethics + Own Published Standards',
     description:
       'Are major consulting firms upholding their professional independence and ethical obligations, or compromising them through conflicts of interest and selective service to political actors?',
-    count: 3,
-    gradeCount: { C: 2, D: 1 },
+    count: 7,
+    gradeCount: { B: 2, C: 3, D: 2 },
   },
   {
     href: '/accounting',
@@ -52,8 +52,8 @@ const sectors = [
     framework: 'AICPA Code of Professional Conduct + PCAOB Standards',
     description:
       'Are the major accounting firms upholding their professional independence and audit integrity, or compromising them through conflicts of interest and regulatory failures?',
-    count: 3,
-    gradeCount: { C: 1, D: 2 },
+    count: 7,
+    gradeCount: { B: 3, C: 2, D: 2 },
   },
   {
     href: '/hospitals',
@@ -61,8 +61,8 @@ const sectors = [
     framework: 'AMA Code of Medical Ethics + Own Mission Statements',
     description:
       'Are major hospital systems upholding their medical ethics obligations and patient care commitments, or compromising them under financial, political, or regulatory pressure?',
-    count: 3,
-    gradeCount: { B: 1, C: 1, D: 1 },
+    count: 7,
+    gradeCount: { A: 1, B: 2, C: 2, D: 2 },
   },
 ]
 
